@@ -36,6 +36,9 @@
     "test": "npm run lint"
   },
   "standard": {
+    "ignore": [
+      "test/"
+    ],
     "globals": [
       "describe",
       "it",
