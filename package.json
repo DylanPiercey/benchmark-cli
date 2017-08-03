@@ -6,7 +6,7 @@
   "bin": {
     "benchmark": "./bin/benchmark"
   },
-  "bugs": "https://github.com/DylanPiercey/opsec/issues",
+  "bugs": "https://github.com/DylanPiercey/benchmark-cli/issues",
   "dependencies": {
     "benchmark": "^2.1.4",
     "globby": "^6.1.0",
@@ -19,7 +19,7 @@
     "snazzy": "^7.0.0",
     "standard": "^10.0.2"
   },
-  "homepage": "https://github.com/DylanPiercey/opsec",
+  "homepage": "https://github.com/DylanPiercey/benchmark-cli",
   "keywords": [
     "benchmark",
     "evaluate",
@@ -29,7 +29,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DylanPiercey/opsec"
+    "url": "https://github.com/DylanPiercey/benchmark-cli"
   },
   "scripts": {
     "lint": "standard --verbose | snazzy",
