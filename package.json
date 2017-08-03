@@ -1,0 +1,48 @@
+{
+  "name": "benchmark-cli",
+  "description": "CLI application to benchmark JavaScript files.",
+  "version": "1.0.0",
+  "author": "Dylan Piercey <pierceydylan@gmail.com>",
+  "bin": {
+    "benchmark": "./bin/benchmark"
+  },
+  "bugs": "https://github.com/DylanPiercey/opsec/issues",
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "globby": "^6.1.0",
+    "mri": "^1.1.0",
+    "mz": "^2.6.0",
+    "ora": "^1.3.0",
+    "p-event": "^1.3.0"
+  },
+  "devDependencies": {
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.2"
+  },
+  "homepage": "https://github.com/DylanPiercey/opsec",
+  "keywords": [
+    "benchmark",
+    "evaluate",
+    "opsec"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DylanPiercey/opsec"
+  },
+  "scripts": {
+    "lint": "standard --verbose | snazzy",
+    "test": "npm run lint"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach"
+    ]
+  }
+}

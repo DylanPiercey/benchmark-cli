@@ -1,0 +1,71 @@
+#!/usr/bin/env node
+'use strict'
+
+const vm = require('vm')
+const fs = require('mz/fs')
+const ora = require('ora')
+const mri = require('mri')
+const path = require('path')
+const pEvent = require('p-event')
+const glob = require('globby')
+const Module = require('module')
+const Benchmark = require('benchmark')
+
+const spinner = ora()
+const folder = path.join(__dirname, '..')
+const opts = mri(process.argv.slice(2), { alias: { e: 'evaluate' } })
+
+// Creates a new benchmark suite, loads the files and runs them.
+const suite = new Benchmark.Suite()
+glob(opts._)
+  .then(files => Promise.all(files.map(load)))
+  .then(() => {
+    if (opts.e) append('evaluate', opts.e)
+    suite.run({ async: true })
+    return pEvent(suite, 'complete')
+  })
+  .catch(console.error)
+
+/**
+ * Loads a js file and adds it to the benchmark suite.
+ *
+ * @param {string} file - the file to load.
+ * @return {Promise}
+ */
+function load (file) {
+  const filename = path.join(folder, file)
+  return fs
+    .readFile(filename, 'utf8')
+    .then(append.bind(0, filename))
+}
+
+/**
+ * Adds a new script to be executed.
+ *
+ * @param {string} filename - the file path for the script.
+ * @param {string} text - the script to execute.
+ */
+function append (filename, text) {
+  const parsed = path.parse(filename)
+  const dirname = parsed.dir
+  const name = parsed.name
+  const script = new vm.Script(Module.wrap(text), { filename: filename })
+  const module = new Module(filename)
+  module.filename = filename
+  module.paths = Module._nodeModulePaths(dirname)
+
+  suite.add({
+    name: name,
+    fn: () => script.runInThisContext()(module.exports, module.require, module, filename, dirname),
+    onCycle: e => {
+      if (spinner.active !== e.target) {
+        spinner.active = e.target
+        spinner.start(e.target)
+      }
+    },
+    onComplete: e => {
+      spinner.active = null
+      spinner.succeed()
+    }
+  })
+}
