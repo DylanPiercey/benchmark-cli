@@ -1,7 +1,7 @@
 {
   "name": "benchmark-cli",
   "description": "CLI application to benchmark JavaScript files.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "bin": {
     "benchmark": "./bin/benchmark"
