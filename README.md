@@ -28,7 +28,7 @@ Supports requiring dependencies and uses [benchmark.js](https://benchmarkjs.com)
 # Installation
 
 ```console
-npm install benchmark-cli
+npm install benchmark-cli -g
 ```
 
 # Examples
