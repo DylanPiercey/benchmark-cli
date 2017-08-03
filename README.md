@@ -36,20 +36,27 @@ npm install benchmark-cli -g
 ### Single file
 ```console
 $ benchmark ./test/example1.js
-✔ ./test/example1.js x 74,792 ops/sec ±2.63% (81 runs sampled)
+✔ example1 x 83,285 ops/sec ±0.83% (86 runs sampled)
 ```
 
 ### Glob of files
 ```console
 $ benchmark ./test/*.js
-✔ ./test/example1.js x 74,792 ops/sec ±2.63% (81 runs sampled)
-✔ ./test/example2.js x 1,440,522 ops/sec ±2.76% (78 runs sampled)
+✔ example1 x 84,518 ops/sec ±0.90% (87 runs sampled)
+✔ example2 x 1,612,805 ops/sec ±1.81% (80 runs sampled)
 ```
 
-### Evaluate directly
+### Evaluate script
 ```console
 $ benchmark -e "for (var i = 1000; i--;);"
-✔ evaluate x 213,961 ops/sec ±0.75% (88 runs sampled)
+✔ eval-1 x 244,076 ops/sec ±1.17% (86 runs sampled)
+```
+
+### Evaluate multiple scripts
+```console
+$ benchmark -e "1 + 1" -e "1 + 2"
+✔ eval-1 x 1,561,524 ops/sec ±2.24% (77 runs sampled)
+✔ eval-2 x 1,633,941 ops/sec ±1.76% (82 runs sampled)
 ```
 
 ### Contributions

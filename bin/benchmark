@@ -20,7 +20,11 @@ const suite = new Benchmark.Suite()
 glob(opts._)
   .then(files => Promise.all(files.map(load)))
   .then(() => {
-    if (opts.e) append('evaluate', opts.e)
+    if (opts.e) {
+      [].concat(opts.e).forEach((text, i) => {
+        append('eval-' + (i + 1), text)
+      })
+    }
     suite.run({ async: true })
     return pEvent(suite, 'complete')
   })
