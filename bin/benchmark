@@ -12,7 +12,7 @@ const Module = require('module')
 const Benchmark = require('benchmark')
 
 const spinner = ora()
-const folder = path.join(__dirname, '..')
+const folder = process.cwd()
 const opts = mri(process.argv.slice(2), { alias: { e: 'evaluate' } })
 
 // Creates a new benchmark suite, loads the files and runs them.
